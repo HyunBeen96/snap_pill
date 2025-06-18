@@ -1,0 +1,44 @@
+{
+  "items": [
+    {
+      "itemName": "타이레놀 500mg",
+      "efcyQesitm": "해열진통제 | 아세트아미노펜",
+      "itemSeq": "123456",
+      "entpName": "한국얀센",
+      "etcOtcName": "일반의약품",
+      "className": "경구투여"
+    },
+    {
+      "itemName": "타이레놀 정 160mg",
+      "efcyQesitm": "해열진통제 | 아세트아미노펜",
+      "itemSeq": "123457",
+      "entpName": "한국얀센",
+      "etcOtcName": "일반의약품",
+      "className": "경구투여"
+    },
+    {
+      "itemName": "어린이 타이레놀 현탁액",
+      "efcyQesitm": "해열진통제 | 아세트아미노펜",
+      "itemSeq": "123458",
+      "entpName": "한국얀센",
+      "etcOtcName": "일반의약품",
+      "className": "소아용"
+    },
+    {
+      "itemName": "타이레놀 ER 정 650mg",
+      "efcyQesitm": "해열진통제 | 아세트아미노펜",
+      "itemSeq": "123459",
+      "entpName": "한국얀센",
+      "etcOtcName": "처방전 필요",
+      "className": "서방정"
+    },
+    {
+      "itemName": "타이레놀 콜드-S",
+      "efcyQesitm": "감기약 | 복합성분",
+      "itemSeq": "123460",
+      "entpName": "한국얀센",
+      "etcOtcName": "일반의약품",
+      "className": "감기약"
+    }
+  ]
+}

@@ -71,7 +71,14 @@ class _PilldataWidgetState extends State<PilldataWidget> {
         backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
         floatingActionButton: FloatingActionButton.extended(
           onPressed: () async {
-            context.pushNamed(SearchWidget.routeName);
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => SearchWidget(
+                  searchKeyword: _model.textController1.text,
+                ),
+              ),
+            );
           },
           backgroundColor: FlutterFlowTheme.of(context).primary,
           icon: Icon(

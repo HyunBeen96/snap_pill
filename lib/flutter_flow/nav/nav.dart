@@ -33,12 +33,12 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
       debugLogDiagnostics: true,
       refreshListenable: appStateNotifier,
       navigatorKey: appNavigatorKey,
-      errorBuilder: (context, state) => Widget(),
+      errorBuilder: (context, state) => HomePageWidget(),
       routes: [
         FFRoute(
           name: '_initialize',
           path: '/',
-          builder: (context, _) => Widget(),
+          builder: (context, _) => HomePageWidget(),
         ),
         FFRoute(
           name: HomePageWidget.routeName,
@@ -68,7 +68,7 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
         FFRoute(
           name: SearchWidget.routeName,
           path: SearchWidget.routePath,
-          builder: (context, params) => SearchWidget(),
+          builder: (context, params) => SearchWidget(searchKeyword: '타이레놀'),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
     );
