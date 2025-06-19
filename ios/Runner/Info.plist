@@ -16,6 +16,8 @@
 	<string>snappill</string>
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
+	<key>NSCameraUsageDescription</key>
+    <string>약물 촬영을 위해 카메라 접근이 필요합니다</string>
 
 	<key>CFBundleShortVersionString</key>
 	<string>$(FLUTTER_BUILD_NAME)</string>
