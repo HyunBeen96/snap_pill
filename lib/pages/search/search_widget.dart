@@ -7,19 +7,12 @@ import 'dart:convert';
 import 'search_model.dart';
 export 'search_model.dart';
 import 'package:flutter/services.dart';
+import 'package:http/http.dart' as http;
 
 
-/// pilldata페이지에서 의약품 검색하면 나올 페이지 만들고 싶어
-/// 결과에 따른 의약품 목록 보여줄거고 목록에 나온 약들은 리스트로 정리되고 오른쪽에 +버튼 누르면 등록된 약에 등록되게 할거야
-/// 색상이나 컨셉은 지금까지 내가 했던거랑 비슷하게 맞춰줘
-/// 그 외 필요한 부분은 너가 잘 생각해서 추가 해봐
-///
 class SearchWidget extends StatefulWidget {
   final String searchKeyword; // ✅ 이 줄 추가
-  const SearchWidget({
-    super.key,
-    required this.searchKeyword, // ✅ 이 줄도 추가
-  });
+  const SearchWidget({Key? key, required this.searchKeyword}) : super(key: key);
 
   static String routeName = 'search';
   static String routePath = '/search';
@@ -29,23 +22,45 @@ class SearchWidget extends StatefulWidget {
 }
 
 class _SearchWidgetState extends State<SearchWidget> {
+
+  Future<List<SearchModel>> loadJsonAsset() async {
+    final jsonStr = await rootBundle.loadString('assets/tablet_data_final.json');
+    final List<dynamic> jsonData = json.decode(jsonStr);
+    final List<SearchModel> items = jsonData
+        .map((item) => SearchModel.fromJson(Map<String, dynamic>.from(item)))
+        .toList();
+    return items;
+  }
+
+  List<SearchModel> searchResults = [];
+  TextEditingController _searchController = TextEditingController(); // 검색창 연결용
+  List<SearchModel> results = [];
   late SearchModel _model;
   final scaffoldKey = GlobalKey<ScaffoldState>();
+
+
+  Future<List<SearchModel>> loadSearchData(BuildContext context) async {
+    final String jsonString = await DefaultAssetBundle.of(context)
+        .loadString('assets/json/tablet_data_final.json');
+
+    final List<dynamic> jsonList = json.decode(jsonString);
+
+    return jsonList
+        .map((jsonItem) => SearchModel.fromJson(jsonItem))
+        .toList();
+  }
 
   @override
   void initState() {
     super.initState();
-    _model = createModel(
-      context,
-          () => SearchModel(
-        name: '',
-        description: '',
-        manufacturer: '',
-        type: [],
-        etcOtcName: '',
-        className: '',
-      ),
-    );
+    loadJson();
+  }
+
+  void loadJson() async {
+    final data = await loadJsonAsset();
+    setState(() {
+      searchItems = data;
+    });
   }
 
   @override
@@ -98,15 +113,16 @@ class _SearchWidgetState extends State<SearchWidget> {
         body: SafeArea(
           top: true,
           child: FutureBuilder(
-            future: rootBundle.loadString('assets/data/search_api_example_response.json'),
+            future: fetchSearchResults(widget.searchKeyword),
             builder: (context, snapshot) {
-              if (!snapshot.hasData) {
+              if (snapshot.connectionState == ConnectionState.waiting) {
                 return Center(child: CircularProgressIndicator());
               }
+              if (!snapshot.hasData || snapshot.hasError) {
+                return Center(child: Text('검색 결과가 없습니다'));
+              }
 
-              final parsed = json.decode(snapshot.data! as String);
-              final List<dynamic> items = parsed['items'];
-              final results = items.map((e) => SearchModel.fromJson(e)).toList(); // ✅ 이게 맞는 방법
+              final results = snapshot.data as List<SearchModel>;
 
               return ListView.builder(
                 itemCount: results.length,
@@ -153,10 +169,10 @@ class _SearchWidgetState extends State<SearchWidget> {
                                     item.name,
                                     style: FlutterFlowTheme.of(context).titleMedium.override(
                                       font: GoogleFonts.manrope(
-                                        fontWeight: FontWeight.w600,
+                                        fontWeight: FontWeight.w700,
                                       ),
                                       color: Color(0xFF57636C),
-                                      fontSize: 16.0,
+                                      fontSize: 18.0,
                                     ),
                                   ),
                                   Text(
