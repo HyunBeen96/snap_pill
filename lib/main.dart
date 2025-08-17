@@ -1,16 +1,26 @@
 import 'package:flutter/material.dart';
-
+import 'package:provider/provider.dart';  // 추가
+import '/services/app_state.dart';         // 추가
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_web_plugins/url_strategy.dart';
 import 'flutter_flow/flutter_flow_util.dart';
 import 'flutter_flow/internationalization.dart';
+import '/index.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  // AppState 초기화
+  final appState = AppState();
   GoRouter.optionURLReflectsImperativeAPIs = true;
   usePathUrlStrategy();
 
-  runApp(MyApp());
+  runApp(
+    // Provider로 AppState 제공
+    ChangeNotifierProvider.value(
+      value: appState,
+      child: MyApp(),
+    ),
+  );
 }
 
 class MyApp extends StatefulWidget {
