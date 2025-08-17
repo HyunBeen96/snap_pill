@@ -1,6 +1,15 @@
 # 💊 SnapPill
 > **AI 기반 약물 인식 및 복용 관리 애플리케이션**
 
+
+<table>
+<tr>
+<td><img src="./images/main1.png" width="250" alt="스크린1"></td>
+<td><img src="./images/pill_alarm1.png" width="250" alt="스크린2"></td>
+<td><img src="./images/search1.png" width="250" alt="스크린3"></td>
+</tr>
+</table>
+
 <div align="center">
 
 ![Flutter](https://img.shields.io/badge/Flutter-02569B?style=for-the-badge&logo=flutter&logoColor=white)
