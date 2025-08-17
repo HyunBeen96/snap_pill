@@ -260,6 +260,16 @@ List<Color> extractDominantColors(ui.Image image) {
 
 ## 📱 Screenshots & Demo
 
+<div align="center">
+<a href="https://youtube.com/shorts/75gIe5C92i0">
+  <img src="https://img.youtube.com/vi/75gIe5C92i0/maxresdefault.jpg" width="800">
+</a>
+</div>
+<div align="center">
+*클릭하면 데모 영상을 볼 수 있습니다*
+</div>
+
+
 ### 주요 화면
 
 | 홈 대시보드 | AI 카메라 | 검색 결과 | 알람 관리 |
